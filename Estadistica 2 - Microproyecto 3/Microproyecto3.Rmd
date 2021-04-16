@@ -1,0 +1,47 @@
+---
+title: "Microproyecto 3 - Estadística 2"
+output: pdf_document
+---
+
+```{r}
+DB <- read.csv("/Users/rudiks/Desktop/microproyecto3.csv")
+```
+
+```{r}
+factorA_PH <- factor(DB$PH)
+factorB_Endulzante <- factor(DB$Endulzante)
+Tiempo <- DB$Tiempo
+```
+
+```{r}
+modelo <- lm (Tiempo ~ (factorA_PH+factorB_Endulzante)^2)
+summary(modelo)
+```
+```{r}
+ANOVA <- aov(modelo)
+summary(ANOVA)
+```
+```{r}
+plot(modelo)
+```
+
+```{r}
+shapiro.test(rstandard(modelo))
+
+```
+```{r}
+coef(modelo)
+```
+
+```{r}
+modeloFinal <- lm(Tiempo ~(factorA_PH+factorB_Endulzante)^2)
+modeloFinal
+```
+# Predicciones
+
+```{r}
+factor_PH_prueba <- factor(c("Agua","Limonada"))
+factor_Endulzante_prueba <- factor(c("Sin azúcar","Con azúcar"))
+predict(modeloFinal, data.frame(factorA_PH=factor_PH_prueba, factorB_Endulzante=factor_Endulzante_prueba))
+```
+
