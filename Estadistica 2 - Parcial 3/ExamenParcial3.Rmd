@@ -1,0 +1,157 @@
+---
+title: "R Notebook - Parcial 3"
+author: "Rudik Roberto Rompich"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+# Base de datos tabulada 
+
+```{r}
+DB <- read.csv("/Users/rudiks/Desktop/DatosParcial.csv")
+print(DB)
+```
+# Factores identificados 
+
+```{r}
+factorA_Marca <- factor(DB$Marca)
+factorB_Tipo <- factor(DB$Tipo)
+factorC_Temperatura <- factor(DB$Temperatura)
+Suciedad <- DB$Suciedad 
+```
+
+# Modelo planteado
+
+```{r}
+modelo <- lm (Suciedad ~ (factorA_Marca+factorB_Tipo+factorC_Temperatura)^3)
+summary(modelo)
+```
+## Análisis 
+
+Se comenzará definiendo un nivel de significancia de $\alpha=0.05$. Por otro lado, la hipotésis nula que se manejará es: la interacción es igual. 
+
+Los siguientes casos son triviales, así que no se analizarán (i.e. la hipótesis nula se acepta. No hay interacción significativa.): 
+
+Asúmase como factor A es marca, factor B es tipo y factor C Temperatura. 
+
+- factorA_MarcaZ:factorB_TipoLíquido:factorC_TemperaturaTibia  
+- factorA_MarcaY:factorB_TipoLíquido:factorC_TemperaturaTibia 
+- factorB_TipoLíquido:factorC_TemperaturaTibia      
+- factorA_MarcaY:factorC_TemperaturaTibia   
+- factorC_TemperaturaTibia  
+- factorA_MarcaZ 
+
+Entonces, ahora tenemos los siguientes tests: 
+
+Asúmase como factor A es marca, factor B es tipo y factor C Temperatura. 
+
+### Factor A 
+
+$$H_0: \qquad \mu_A = \mu_A  $$
+$$H_a: \qquad \mu_A \neq \mu_A  $$
+Hay evidencia significativa que hay diferencia entre el factor A. 
+
+### Factor B - Marca Y
+
+$$H_0: \qquad \mu_By = \mu_By  $$
+$$H_a: \qquad \mu_By \neq \mu_By  $$
+Hay evidencia significativa que hay diferencia entre el factor B. 
+
+### Factor - Marca Z
+
+$$H_0: \qquad \mu_Z= \mu_Z  $$
+Hay evidencia significativa que hay diferencia entre en la marca Z. 
+
+$$H_a: \qquad \mu_Z \neq \mu_Z  $$
+
+### Factor B - Liquido 
+
+$$H_0: \qquad \mu_Bl = \mu_Bl  $$
+
+$$H_a: \qquad \mu_Bl \neq \mu_Bl  $$
+Hay evidencia significativa que hay diferencia entre el factor B - líquido . 
+
+### FactorA - MarcaY:FactorB-TipoLíquido    
+
+$$H_0: \qquad \mu_Ay = \mu_Bl  $$
+
+$$H_a: \qquad \mu_Ay \neq \mu_Bl  $$
+Hay evidencia significativa que hay diferencia entre el factor A - Marca Y y Factor B - Tipo Liquido. 
+
+### FactorA_MarcaZ:FactorB-TipoLíquido    
+
+$$H_0: \qquad \mu_AZ = \mu_Bl  $$
+
+$$H_a: \qquad \mu_AZ \neq \mu_Bl  $$
+
+Hay evidencia significativa que hay diferencia entre el factor A - Marca Z y Factor B - Tipo líquido . 
+
+### Factor A-MarcaZ:FactorC- TemperaturaTibia                       
+$$H_0: \qquad \mu_AZ = \mu_C  $$
+
+$$H_a: \qquad \mu_AZ \neq \mu_BC  $$
+Hay evidencia significativa que hay diferencia entre el factor A - marca Z y factor B - tipo líquido. 
+
+
+
+# ANOVA 
+
+```{r}
+ANOVA <- aov(modelo)
+summary(ANOVA)
+```
+
+# Gráficas 
+
+```{r}
+plot(modelo)
+```
+Se verifican con los siguientes supuestos: 
+
+### Varianza constante 
+
+A pesar de que la línea roja no es recta, la línea se ajusta en una forma casi recta, por lo que el test parece cumplirse. 
+
+### Normalidad 
+
+El gráfico parece indicar que sí se cumple el test de normalidad. 
+
+### Independencia 
+
+La independencia también paerce cumplirse por el el gráfico de normalidad. 
+
+# Test de Shapiro 
+
+```{r}
+shapiro.test(rstandard(modelo))
+
+```
+
+El test de Shapiro nos confirma que es normal. 
+
+
+# Coeficientes 
+
+```{r}
+coef(modelo)
+```
+
+# Modelo Final 
+
+```{r}
+modeloFinal <- lm(Suciedad ~(factorA_Marca+factorB_Tipo+factorC_Temperatura)^3)
+modeloFinal
+```
+
+# Predicciones 
+
+```{r}
+factor_marca_prueba <- factor(c("Y"))
+factor_tipo_prueba <- factor(c("En polvo"))
+factor_temperatura_prueba <- factor(c("Caliente "))
+
+predict(modeloFinal, data.frame(factorA_Marca=factor_marca_prueba, factorB_Tipo=factor_tipo_prueba, 
+                                factorC_Temperatura = factor_temperatura_prueba),
+        level=0.95, interval= "confidence")
+```

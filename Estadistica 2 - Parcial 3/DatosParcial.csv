@@ -1,0 +1,37 @@
+﻿Marca,Tipo ,Temperatura ,Suciedad 
+X,En polvo,Caliente ,85
+X,En polvo,Caliente ,88
+X,En polvo,Caliente ,80
+X,En polvo,Tibia ,82
+X,En polvo,Tibia ,83
+X,En polvo,Tibia ,85
+X,Líquido,Caliente ,78
+X,Líquido,Caliente ,75
+X,Líquido,Caliente ,72
+X,Líquido,Tibia ,75
+X,Líquido,Tibia ,75
+X,Líquido,Tibia ,73
+Y,En polvo,Caliente ,90
+Y,En polvo,Caliente ,92
+Y,En polvo,Caliente ,92
+Y,En polvo,Tibia ,88
+Y,En polvo,Tibia ,86
+Y,En polvo,Tibia ,88
+Y,Líquido,Caliente ,78
+Y,Líquido,Caliente ,76
+Y,Líquido,Caliente ,70
+Y,Líquido,Tibia ,76
+Y,Líquido,Tibia ,77
+Y,Líquido,Tibia ,76
+Z,En polvo,Caliente ,85
+Z,En polvo,Caliente ,87
+Z,En polvo,Caliente ,88
+Z,En polvo,Tibia ,76
+Z,En polvo,Tibia ,74
+Z,En polvo,Tibia ,78
+Z,Líquido,Caliente ,60
+Z,Líquido,Caliente ,70
+Z,Líquido,Caliente ,68
+Z,Líquido,Tibia ,55
+Z,Líquido,Tibia ,57
+Z,Líquido,Tibia ,54
