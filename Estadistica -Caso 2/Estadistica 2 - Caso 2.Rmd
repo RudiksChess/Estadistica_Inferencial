@@ -1,0 +1,79 @@
+---
+title: "R Notebook"
+output: pdf_document
+---
+
+```{r}
+library(qcc)
+help("qcc")
+```
+
+```{r}
+boquilla <- read.csv("/Users/rudiks/Git/Estadistica_Inferencial/Estadistica -Caso 2/DBs/Boquilla.csv")
+boquilla_resultado = qcc(boquilla, type = "xbar", nsigmas = 3) 
+boquilla_resultado
+```
+```{r}
+perpendicularidad <- read.csv("/Users/rudiks/Git/Estadistica_Inferencial/Estadistica -Caso 2/DBs/Perpendicularidad.csv")
+perpendicularidad_resultado = qcc(perpendicularidad, type = "xbar", nsigmas = 3) 
+perpendicularidad_resultado
+```
+
+```{r}
+permeabilidad <- read.csv("/Users/rudiks/Git/Estadistica_Inferencial/Estadistica -Caso 2/DBs/Permeabilidad.csv")
+permeabilidad_resultado = qcc(permeabilidad, type = "xbar", nsigmas = 3) 
+permeabilidad_resultado
+```
+
+```{r}
+presion <- read.csv("/Users/rudiks/Git/Estadistica_Inferencial/Estadistica -Caso 2/DBs/presion.csv")
+presion_resultado = qcc(presion, type = "xbar", nsigmas = 3) 
+presion_resultado
+```
+```{r}
+defectos <- read.csv("/Users/rudiks/Git/Estadistica_Inferencial/Estadistica -Caso 2/DBs/defect.csv")
+defectos_resultado <- with(defectos, qcc(defectos$X, defectos$muestras, type = "np", data.name = "Defectos"))
+defectos_resultado
+```
+```{r}
+fabricacion <- read.csv("/Users/rudiks/Git/Estadistica_Inferencial/Estadistica -Caso 2/DBs/fabricacion.csv")
+fabricacion <- with(fabricacion, qcc(fabricacion$Fabricacion, fabricacion$Prop, type = "np", data.name = "Fabricacion"))
+fabricacion
+```
+
+```{r}
+Corona_incompleta <- read.csv("/Users/rudiks/Git/Estadistica_Inferencial/Estadistica -Caso 2/DBs/Corona Incompleta.csv")
+Corona_incompleta <- with(Corona_incompleta, qcc(Corona_incompleta$Corona.incompleta, Corona_incompleta$X, type = "np", data.name = "Corona incompleta"))
+Corona_incompleta
+```
+
+```{r}
+Corona_colapsado <- read.csv("/Users/rudiks/Git/Estadistica_Inferencial/Estadistica -Caso 2/DBs/Corona Colapsada.csv")
+Corona_colapsado <- with(Corona_colapsado, qcc(Corona_colapsado$Corona.colapsada, Corona_colapsado$X, type = "np", data.name = "Corona colapsado"))
+Corona_colapsado 
+```
+
+```{r}
+Rebaba_en_corona <- read.csv("/Users/rudiks/Git/Estadistica_Inferencial/Estadistica -Caso 2/DBs/Rebaba en corona.csv")
+Rebaba_en_corona <- with(Rebaba_en_corona, qcc(Rebaba_en_corona$Rebaba.en.corona, Rebaba_en_corona$X, type = "np", data.name = "Rebaba en corona"))
+Rebaba_en_corona
+```
+
+```{r}
+Manchas_De_Agua <- read.csv("/Users/rudiks/Git/Estadistica_Inferencial/Estadistica -Caso 2/DBs/Manchas de agua.csv")
+Manchas_De_Agua <- with(Manchas_De_Agua, qcc(Manchas_De_Agua$Manchas.de.agua, Manchas_De_Agua$X, type = "np", data.name = "Manchas de Agua"))
+Manchas_De_Agua
+```
+
+```{r}
+Puntos_negros <- read.csv("/Users/rudiks/Git/Estadistica_Inferencial/Estadistica -Caso 2/DBs/Puntos negros.csv")
+Puntos_negros <- with(Puntos_negros, qcc(Puntos_negros$Puntos.negros, Puntos_negros$X, type = "np", data.name = "Puntos negros"))
+Puntos_negros
+```
+
+```{r}
+Tono <- read.csv("/Users/rudiks/Git/Estadistica_Inferencial/Estadistica -Caso 2/DBs/Tono.csv")
+Tono <- with(Tono, qcc(Tono, X, type = "np", data.name = "Tono"))
+Tono
+```
+
