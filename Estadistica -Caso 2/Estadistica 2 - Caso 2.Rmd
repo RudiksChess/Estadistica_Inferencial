@@ -10,18 +10,19 @@ help("qcc")
 
 ```{r}
 boquilla <- read.csv("/Users/rudiks/Git/Estadistica_Inferencial/Estadistica -Caso 2/DBs/Boquilla.csv")
-boquilla_resultado = qcc(boquilla, type = "xbar", nsigmas = 3) 
+boquilla_resultado = qcc(boquilla, type = "xbar",, nsigmas = 3) 
 boquilla_resultado
 ```
 ```{r}
-perpendicularidad <- read.csv("/Users/rudiks/Git/Estadistica_Inferencial/Estadistica -Caso 2/DBs/Perpendicularidad.csv")
+perpendicularidad <- read.csv("/Users/rudiks/Git/Estadistica_Inferencial/Estadistica -Caso 2/DBs/perper.csv")
+print(perpendicularidad)
 perpendicularidad_resultado = qcc(perpendicularidad, type = "xbar", nsigmas = 3) 
 perpendicularidad_resultado
 ```
 
 ```{r}
 permeabilidad <- read.csv("/Users/rudiks/Git/Estadistica_Inferencial/Estadistica -Caso 2/DBs/Permeabilidad.csv")
-permeabilidad_resultado = qcc(permeabilidad, type = "xbar", nsigmas = 3) 
+permeabilidad_resultado = qcc(permeabilidad, type = "xbar") 
 permeabilidad_resultado
 ```
 
