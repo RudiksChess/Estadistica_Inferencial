@@ -1,0 +1,120 @@
+---
+title: "HT 5 - Estadística 2"
+author: "Rudik Roberto Rompich"
+output:
+  pdf_document: default
+---
+# Capítulo 19
+
+
+## Problema 1 
+Los datos muestran la presión sanguínea sistólica de 16 corredores antes y después de una carrera de 8 kilómetros.
+
+```{r}
+DB1 <- read.csv("/Users/rudiks/Desktop/p1.csv")
+DB1
+```
+
+```{r}
+#Gráficamente 
+antes<- DB1$Antes
+despues <- DB1$Despues
+hist(antes, breaks=16)
+hist(despues, breaks=16)
+
+```
+
+Con una significancia de 0.05, ¿será posible afirmar que correr 8 kilómetros aumenta la mediana de la presión sanguínea sistólica en menos de 8 puntos?
+
+### Solución.
+
+Comenzamos determinando las medianas. 
+```{r}
+#Mediana antes 
+median(antes)
+
+#Mediana después 
+median(despues)
+
+#Gráficamente con una caja de bigotes 
+boxplot(antes, despues)
+```
+
+Se indentifica la hipótesis: 
+
+\begin{align*}
+H_0: & \tilde{\mu}_A - \tilde{\mu}_D \geq 8\\
+H_a: & \tilde{\mu}_A - \tilde{\mu}_D <8 
+\end{align*}
+
+```{r}
+#Es pareada 
+#Por la hipótesis es de cola inferior, por eso es "less". 
+wilcox.test(antes, despues, mu=8, alternative = "less", paired = T, exact=F, conf.int = 0.95)
+```
+$\therefore$ Por la prueba del valor-$p$ con un significancia 0.05; 0.000236<0.05. Por lo tanto, la hipótesis nula se rechaza, es decir aumenta la mediana de la presión sanguínea sistólica en menos de 8 puntos en una carrera de 8 km. 
+
+
+## Problema 2
+
+Los  siguientes  datos  representan  los  pesos,  en  kilogramos,  del  equipaje  personal  que llevan, en diferentes vuelos, un miembro de  un equipo de béisbol y un jugador de  un equipo de baloncesto.
+
+```{r}
+DB <- read.csv("/Users/rudiks/Desktop/p2.csv")
+DB
+```
+
+
+Con una significancia de 0.05. ¿Podemos afirmar que el peso del equipaje para los dos tipos de atletas es diferente?
+
+### Solución.
+
+Se tiene la hipótesis: 
+
+\begin{align*}
+H_0: & \tilde{\mu}_{beisbol} = \tilde{\mu}_{baloncesto} \\
+H_a: & \tilde{\mu}_{beisbol} \neq \tilde{\mu}_{baloncesto}
+\end{align*}
+
+Como la muestra no es pareada, descartamos la prueba de signos y la única posibilidad es Wilcoxon. Es decir: 
+```{r}
+baloncesto <- DB$Jugador_de_baloncesto
+beisbol <- DB$Jugador_de_beisbol
+wilcox.test(baloncesto, beisbol, alternative ="t", paired = F, exact= F, conf.int = 0.95)
+```
+$\therefore$ Por la prueba del valor-$p$ con un significancia 0.05; 0.7079>0.05. Por lo tanto, la hipótesis nula NO se rechaza, es decir que no podemos decir que el peso del equipaje es distinto. 
+
+
+## Problema 3 
+```{r}
+DB <- read.csv("/Users/rudiks/Desktop/p3.csv")
+DB
+```
+
+Los  datos mostrados se recolectaron  usando  un  diseño  completamente  aleatorizado. Son las calificaciones del examen de aprovechamiento para cuatro diferentes grupos de estudiantes,  donde  cada  grupo  recibió  enseñanza  mediante  una  técnica  diferente. ¿Podemos afirmar que todos los métodos producen resultados similares?
+
+### Solución.
+
+Tenemos la hipótesis
+\begin{align*}
+H_0: & \tilde{\mu}_{1} = \tilde{\mu}_{2} = \tilde{\mu}_{3}= \tilde{\mu}_{4}  \\
+H_a: & \tilde{\mu}_{1} \neq \tilde{\mu}_{2} \neq \tilde{\mu}_{3}\neq \tilde{\mu}_{4}
+\end{align*}
+
+Por las características del problema, únicamente se puede utilizar Kruskal-Wallis.
+```{r}
+m1 <- DB$Metodo_1
+m2 <- DB$Metodo_2
+m3 <- DB$Metodo_3
+m4 <- DB$Metodo_4
+
+kruskal.test(list(m1,m2,m3,m4))
+```
+
+$\therefore$ Por la prueba del valor-$p$ con un significancia no específicada, pero se asumirá $\alpha=0.5$; 0.2208>0.05. Por lo tanto, la hipótesis nula NO se rechaza, es decir que podemos decir que todos los métodos producen resultados similares. 
+
+
+# Capítulo 12
+
+
+
